@@ -28,7 +28,11 @@ const operate = function (operator, a, b) {
     } else return "ERROR"
 }
 
-//Button functionality - use map??
+// Add clicked numbers to screen
+
+const screen = document.querySelector('#screen');
+
+// Listen to buttons
 
 const numberBtn = document.querySelectorAll('.number');
 
@@ -36,7 +40,15 @@ const numberArray = Array.from(numberBtn);
 
 numberArray.forEach(numberBtn => {
     numberBtn.addEventListener('click', () => {
+        // Log button clicked
         console.log(parseInt(numberBtn.textContent));
+        // Add number to variable
+
+        // Add button to screen
+        const screenContent = document.createElement('div');
+        screenContent.classList.add('screen-content');
+        screenContent.textContent = parseInt(numberBtn.textContent);
+        screen.appendChild(screenContent);
     });
 });
 

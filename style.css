@@ -11,6 +11,10 @@ div {
     border-color: rgb(0, 166, 255);
 }
 
+.screen-content {
+    all: unset;
+}
+
 #calculator {
     display: flex;
     flex-direction: column;
