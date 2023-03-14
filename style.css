@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+div {
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(0, 166, 255);
+}
+
+#calculator {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    height: 30px;
+}
+
+#screen {
+    padding: 5px;
+}
+
+button {
+    padding: 5px;
+    margin: 3px;
+}
