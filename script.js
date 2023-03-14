@@ -1,3 +1,4 @@
+// Define math operations
 const add = function (a, b) {
     return a + b;
 }
@@ -14,6 +15,7 @@ const divide = function (a, b) {
     return a / b;
 }
 
+// Define operator
 const operate = function (operator, a, b) {
     if (operator === "add") {
         return add(a, b)
@@ -25,3 +27,15 @@ const operate = function (operator, a, b) {
         return divide(a, b)
     } else return "ERROR"
 }
+
+//Button functionality - use map??
+
+const numberBtn = document.querySelectorAll('.number');
+
+const numberArray = Array.from(numberBtn);
+
+numberArray.forEach(numberBtn => {
+    numberBtn.addEventListener('click', () => {
+        console.log(parseInt(numberBtn.textContent));
+    });
+});
