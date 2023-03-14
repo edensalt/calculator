@@ -39,3 +39,13 @@ numberArray.forEach(numberBtn => {
         console.log(parseInt(numberBtn.textContent));
     });
 });
+
+const operatorBtn = document.querySelectorAll('.operator');
+
+const operatorArray = Array.from(operatorBtn);
+
+operatorArray.forEach(operatorBtn => {
+    operatorBtn.addEventListener('click', () => {
+        console.log(operatorBtn.textContent);
+    });
+});
