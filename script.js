@@ -65,12 +65,13 @@ buttons.forEach(button => {
             while (screen.firstChild) {
                 screen.removeChild(screen.firstChild);
             };
-            console.log(operate(currentOperator, a, b));
+            total = (operate(currentOperator, a, b));
+            console.log(total);
             const screenContent = document.createElement('div');
                 screenContent.classList.add('screen-content');
-                screenContent.textContent = operate(currentOperator, a, b);
+                screenContent.textContent = total;
                 screen.appendChild(screenContent);
-            b = operate(currentOperator, a, b);
+            b = total;
         }
         // if equals, use the defined operator to run the function
     });
