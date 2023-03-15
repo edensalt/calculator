@@ -34,20 +34,24 @@ const operate = function (operator, a, b) {
 }
 
 // Query selectors
-
 const screen = document.querySelector('#screen');
 const buttons = document.querySelectorAll('button');
 const numberBtn = document.querySelectorAll('.number');
 const operatorBtn = document.querySelectorAll('.operator');
 
+// Action for button clicks
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
-        if (e.target.classList.contains('operator')) {
+        if (e.target.id === 'clear') {
+            a = 0;
+            b = 0;
+            while (screen.firstChild) {
+                screen.removeChild(screen.firstChild);
+            };
+        } else if (e.target.classList.contains('operator')) {
             a = parseInt(b);
             b = 0;
             currentOperator = button.id;
-            console.log(button.classList);
-            console.log(currentOperator);
             // clear screen
             while (screen.firstChild) {
                 screen.removeChild(screen.firstChild);
@@ -57,22 +61,18 @@ buttons.forEach(button => {
                 screenContent.classList.add('screen-content');
                 screenContent.textContent = button.textContent;
                 screen.appendChild(screenContent);
-                //Add number to variable
                 b += button.textContent;
-                console.log(b);
         } else if (e.target.id === 'equals') {
             b = parseInt(b);
             while (screen.firstChild) {
                 screen.removeChild(screen.firstChild);
             };
             total = (operate(currentOperator, a, b));
-            console.log(total);
             const screenContent = document.createElement('div');
                 screenContent.classList.add('screen-content');
                 screenContent.textContent = total;
                 screen.appendChild(screenContent);
             b = total;
         }
-        // if equals, use the defined operator to run the function
     });
 });
