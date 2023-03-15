@@ -81,5 +81,3 @@ buttons.forEach(button => {
         }
     });
 });
-
-//For rounding, max divs and if the next number is >=5, round up the last number, maybe??
