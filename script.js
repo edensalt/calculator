@@ -29,7 +29,9 @@ const operate = function (operator, a, b) {
     } else if (operator === "multiply") {
         return multiply(a, b)
     } else if (operator == "divide") {
-        return divide(a, b)
+        if (b === 0) {
+            return "ERROR! Can't divide by 0!"
+        } else return divide(a, b)
     } else return "ERROR"
 }
 
@@ -73,6 +75,9 @@ buttons.forEach(button => {
                 screenContent.textContent = total;
                 screen.appendChild(screenContent);
             b = total;
+            if (typeof total === 'string') {
+                b = a
+            };
         }
     });
 });
