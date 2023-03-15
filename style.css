@@ -54,7 +54,9 @@ button {
     height: 50px;
     padding: 5px;
     margin: 3px;
-    border: none;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(72, 72, 72);
     border-radius: 25px;
 }
 

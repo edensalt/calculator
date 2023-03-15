@@ -55,7 +55,7 @@ buttons.forEach(button => {
             };
             let prepareClear = false;
       
-        // Number button
+        // Number button - if string is 12 characters, stop collecting
         } else if (e.target.classList.contains('number')) {
             if (prepareClear === true) {
                 while (screen.firstChild) {
