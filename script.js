@@ -51,7 +51,7 @@ buttons.forEach(button => {
                 screen.removeChild(screen.firstChild);
             };
         } else if (e.target.classList.contains('operator')) {
-            a = parseInt(b);
+            a = parseFloat(b);
             b = 0;
             currentOperator = button.id;
             // clear screen
@@ -65,11 +65,11 @@ buttons.forEach(button => {
                 screen.appendChild(screenContent);
                 b += button.textContent;
         } else if (e.target.id === 'equals') {
-            b = parseInt(b);
+            b = parseFloat(b);
             while (screen.firstChild) {
                 screen.removeChild(screen.firstChild);
             };
-            total = (operate(currentOperator, a, b));
+            total = parseFloat(operate(currentOperator, a, b).toFixed(8));
             const screenContent = document.createElement('div');
                 screenContent.classList.add('screen-content');
                 screenContent.textContent = total;
@@ -81,3 +81,5 @@ buttons.forEach(button => {
         }
     });
 });
+
+//For rounding, max divs and if the next number is >=5, round up the last number, maybe??
