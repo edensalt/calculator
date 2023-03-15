@@ -1,5 +1,6 @@
 let a = 'start';
-let b = 0;
+let b = '0';
+let maxLength = 6;
 let prepareClear = false;
 let currentOperator;
 let total;
@@ -30,9 +31,7 @@ const operate = function (operator, a, b) {
     } else if (operator === "multiply") {
         return multiply(a, b)
     } else if (operator == "divide") {
-        if (b === 0) {
-            return "ERROR! Can't divide by 0!"
-        } else return divide(a, b)
+        return divide(a, b)
     } else return "ERROR"
 }
 
@@ -46,37 +45,45 @@ const operatorBtn = document.querySelectorAll('.operator');
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
         
-        // Clear button
+        // CLEAR BUTTON
         if (e.target.id === 'clear') {
             a = 'start';
-            b = 0;
+            b = '0';
             while (screen.firstChild) {
                 screen.removeChild(screen.firstChild);
             };
             let prepareClear = false;
       
-        // Number button - if string is 12 characters, stop collecting
+        // NUMBER BUTTON
         } else if (e.target.classList.contains('number')) {
             if (prepareClear === true) {
                 while (screen.firstChild) {
                     screen.removeChild(screen.firstChild);
                 }
+            };
+            if (typeof b !== 'string' || b.length < 12) { // Don't add numbers beyond 12
+                const screenContent = document.createElement('div');
+                screenContent.classList.add('screen-content');
+                screenContent.textContent = button.textContent;
+                screen.appendChild(screenContent);
+                b += button.textContent;
+                prepareClear = false;
             }
-            const screenContent = document.createElement('div');
-            screenContent.classList.add('screen-content');
-            screenContent.textContent = button.textContent;
-            screen.appendChild(screenContent);
-            b += button.textContent;
-            prepareClear = false;
 
-         // Operator button
+         // OPERATOR BUTTON
         } else if (e.target.classList.contains('operator')) {
             // if an operator is selected for the first time
             if (typeof a === 'string') {
                 a = parseFloat(b);
-                b = 0;
+                b = '0';
                 currentOperator = button.id;
                 prepareClear = true;
+           
+            // if an operator is selected after equals
+            } else if (typeof b === 'string') {
+                currentOperator = button.id;
+                prepareClear = true;
+
             // if an operator has been previously selected
             } else {
                 console.log('lets total');
@@ -90,22 +97,29 @@ buttons.forEach(button => {
                     screenContent.textContent = 'ERROR';
                     screen.appendChild(screenContent);
                     a = b;
-                    b = 0;
+                    b = '0';
                     currentOperator = button.id;
                     prepareClear = true;
                 } else {
-                    total = parseFloat(operate(currentOperator, a, b).toFixed(8));
+                    total = operate(currentOperator, a, b);
+                    totalString = total.toString();
+                    totalStringShortened = total.toPrecision(maxLength);
                     const screenContent = document.createElement('div');
                     screenContent.classList.add('screen-content');
-                    screenContent.textContent = total;
+                    if (totalString.length > maxLength) {
+                        screenContent.textContent = totalStringShortened;
+                    } else {
+                        screenContent.textContent = total;
+                    }
                     screen.appendChild(screenContent);
                     a = total;
-                    b = 0;
+                    b = '0';
                     currentOperator = button.id;
                     prepareClear = true;
                 }
             }
-        // Equals button
+
+        // EQUALS BUTTON
         } else if (e.target.id === 'equals' && typeof a !== 'string') {
             b = parseFloat(b);
             while (screen.firstChild) {
@@ -117,15 +131,23 @@ buttons.forEach(button => {
                 screenContent.textContent = 'ERROR';
                 screen.appendChild(screenContent);
                 a = b;
-                b = 0;
+                b = '0';
+                prepareClear = true;
             } else {
-                total = parseFloat(operate(currentOperator, a, b).toFixed(8));
+                total = operate(currentOperator, a, b);
+                totalString = total.toString();
+                totalStringShortened = total.toPrecision(maxLength);
                 const screenContent = document.createElement('div');
                 screenContent.classList.add('screen-content');
-                screenContent.textContent = total;
+                if (totalString.length > maxLength) {
+                    screenContent.textContent = totalStringShortened;
+                } else {
+                    screenContent.textContent = total;
+                }
                 screen.appendChild(screenContent);
                 a = total;
-                b = 0;
+                b = '0';
+                prepareClear = true;
             }
         }
     });
