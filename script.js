@@ -80,7 +80,7 @@ buttons.forEach(button => {
                 prepareClear = true;
            
             // if an operator is selected after equals
-            } else if (typeof b === 'string') {
+            } else if (b === '0') {
                 currentOperator = button.id;
                 prepareClear = true;
 
