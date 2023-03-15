@@ -1,3 +1,6 @@
+let a = 0;
+let b = 0;
+
 // Define math operations
 const add = function (a, b) {
     return a + b;
@@ -28,29 +31,36 @@ const operate = function (operator, a, b) {
     } else return "ERROR"
 }
 
-// Add clicked numbers to screen
-
 const screen = document.querySelector('#screen');
-
-// Listen to buttons
-
 const numberBtn = document.querySelectorAll('.number');
 
-const numberArray = Array.from(numberBtn);
+// For 'a', add numbers to screen and the variable
 
-numberArray.forEach(numberBtn => {
+numberBtn.forEach(numberBtn => {
     numberBtn.addEventListener('click', () => {
         // Log button clicked
-        console.log(parseInt(numberBtn.textContent));
-        // Add number to variable
-
+        const userNum = numberBtn.textContent;
+        console.log(userNum);
         // Add button to screen
         const screenContent = document.createElement('div');
         screenContent.classList.add('screen-content');
-        screenContent.textContent = parseInt(numberBtn.textContent);
+        screenContent.textContent = numberBtn.textContent;
         screen.appendChild(screenContent);
+        //Add number to variable
+        a += userNum;
+        console.log(a);
     });
 });
+
+// If an operator is selected...
+
+
+
+// Clear the screen
+
+// Make 'a' a number
+
+// Start collecting numbers for b
 
 const operatorBtn = document.querySelectorAll('.operator');
 
