@@ -1,5 +1,6 @@
 let a = 0;
 let b = 0;
+let currentOperator
 
 // Define math operations
 const add = function (a, b) {
@@ -31,9 +32,18 @@ const operate = function (operator, a, b) {
     } else return "ERROR"
 }
 
+// Query selectors
+
 const screen = document.querySelector('#screen');
 const buttons = document.querySelectorAll('button');
 const numberBtn = document.querySelectorAll('.number');
+const operatorBtn = document.querySelectorAll('.operator');
+// const addBtn = document.querySelector('#add');
+// const subtractBtn = document.querySelector('#subtract');
+// const multiplyBtn = document.querySelector('#multiply');
+// const divideBtn = document.querySelector('#divide');
+
+
 
 // For 'a', add numbers to screen and the variable
 
@@ -41,11 +51,17 @@ const numberBtn = document.querySelectorAll('.number');
 
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('number')) {
+        if (e.target.classList.contains('operator')) {
             a = parseInt(b);
             b = 0;
+            currentOperator = button.id;
             console.log(button.classList);
-        } else {
+            console.log(currentOperator);
+            // clear screen
+            while (screen.firstChild) {
+                screen.removeChild(screen.firstChild);
+            };
+        } else if (e.target.classList.contains('number')) {
             const screenContent = document.createElement('div');
                 screenContent.classList.add('screen-content');
                 screenContent.textContent = button.textContent;
@@ -54,16 +70,6 @@ buttons.forEach(button => {
                 b += button.textContent;
                 console.log(b);
         }
+        // if equals, use the defined operator to run the function
     });
 });
-
-// If an operator is selected...
-
-const operatorBtn = document.querySelectorAll('.operator');
-
-operatorBtn.forEach(operator => {
-    operator.addEventListener('click', () => {
-        // console.log(operator.textContent);
-    });
-});
-// Clear the screen
