@@ -1,4 +1,4 @@
-let a = 0;
+let a = 'start';
 let b = 0;
 let prepareClear = false;
 let currentOperator;
@@ -45,19 +45,16 @@ const operatorBtn = document.querySelectorAll('.operator');
 // Action for button clicks
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
+        
         // Clear button
         if (e.target.id === 'clear') {
-            a = 0;
+            a = 'start';
             b = 0;
             while (screen.firstChild) {
                 screen.removeChild(screen.firstChild);
             };
-        // Operator button
-        } else if (e.target.classList.contains('operator')) {
-            a = parseFloat(b);
-            b = 0;
-            currentOperator = button.id;
-            prepareClear = true;
+            let prepareClear = false;
+      
         // Number button
         } else if (e.target.classList.contains('number')) {
             if (prepareClear === true) {
@@ -71,6 +68,36 @@ buttons.forEach(button => {
             screen.appendChild(screenContent);
             b += button.textContent;
             prepareClear = false;
+
+        // Operator button
+        } else if (e.target.classList.contains('operator')) {
+            // if an operator is selected for the first time
+            if (typeof a === 'string') {
+                a = parseFloat(b);
+                b = 0;
+                currentOperator = button.id;
+                prepareClear = true;
+            // if an operator has been previously selected
+            } else {
+                console.log('lets total');
+                b = parseFloat(b);
+                while (screen.firstChild) {
+                    screen.removeChild(screen.firstChild);
+                };
+                total = parseFloat(operate(currentOperator, a, b).toFixed(8));
+                const screenContent = document.createElement('div');
+                screenContent.classList.add('screen-content');
+                screenContent.textContent = total;
+                screen.appendChild(screenContent);
+                a = total;
+                b = 0;
+                if (typeof total === 'string') {
+                    a = b
+                };
+                currentOperator = button.id;
+                prepareClear = true;
+            }
+        
         // Equals button
         } else if (e.target.id === 'equals') {
             b = parseFloat(b);
@@ -79,12 +106,13 @@ buttons.forEach(button => {
             };
             total = parseFloat(operate(currentOperator, a, b).toFixed(8));
             const screenContent = document.createElement('div');
-                screenContent.classList.add('screen-content');
-                screenContent.textContent = total;
-                screen.appendChild(screenContent);
-            b = total;
+            screenContent.classList.add('screen-content');
+            screenContent.textContent = total;
+            screen.appendChild(screenContent);
+            a = total;
+            b = 0;
             if (typeof total === 'string') {
-                b = a
+                a = b
             };
         }
     });
