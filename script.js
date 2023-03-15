@@ -69,7 +69,7 @@ buttons.forEach(button => {
             b += button.textContent;
             prepareClear = false;
 
-        // Operator button
+         // Operator button
         } else if (e.target.classList.contains('operator')) {
             // if an operator is selected for the first time
             if (typeof a === 'string') {
@@ -84,6 +84,41 @@ buttons.forEach(button => {
                 while (screen.firstChild) {
                     screen.removeChild(screen.firstChild);
                 };
+                if (b === 0 && currentOperator === 'divide') { // divide by 0 error
+                    const screenContent = document.createElement('div');
+                    screenContent.classList.add('screen-content');
+                    screenContent.textContent = 'ERROR';
+                    screen.appendChild(screenContent);
+                    a = b;
+                    b = 0;
+                    currentOperator = button.id;
+                    prepareClear = true;
+                } else {
+                    total = parseFloat(operate(currentOperator, a, b).toFixed(8));
+                    const screenContent = document.createElement('div');
+                    screenContent.classList.add('screen-content');
+                    screenContent.textContent = total;
+                    screen.appendChild(screenContent);
+                    a = total;
+                    b = 0;
+                    currentOperator = button.id;
+                    prepareClear = true;
+                }
+            }
+        // Equals button
+        } else if (e.target.id === 'equals' && typeof a !== 'string') {
+            b = parseFloat(b);
+            while (screen.firstChild) {
+                screen.removeChild(screen.firstChild);
+            };
+            if (b === 0 && currentOperator === 'divide') { // divide by 0 error
+                const screenContent = document.createElement('div');
+                screenContent.classList.add('screen-content');
+                screenContent.textContent = 'ERROR';
+                screen.appendChild(screenContent);
+                a = b;
+                b = 0;
+            } else {
                 total = parseFloat(operate(currentOperator, a, b).toFixed(8));
                 const screenContent = document.createElement('div');
                 screenContent.classList.add('screen-content');
@@ -91,29 +126,7 @@ buttons.forEach(button => {
                 screen.appendChild(screenContent);
                 a = total;
                 b = 0;
-                if (typeof total === 'string') {
-                    a = b
-                };
-                currentOperator = button.id;
-                prepareClear = true;
             }
-        
-        // Equals button
-        } else if (e.target.id === 'equals' && typeof a !== 'string') {
-            b = parseFloat(b);
-            while (screen.firstChild) {
-                screen.removeChild(screen.firstChild);
-            };
-            total = parseFloat(operate(currentOperator, a, b).toFixed(8));
-            const screenContent = document.createElement('div');
-            screenContent.classList.add('screen-content');
-            screenContent.textContent = total;
-            screen.appendChild(screenContent);
-            a = total;
-            b = 0;
-            if (typeof total === 'string') {
-                a = b
-            };
         }
     });
 });
