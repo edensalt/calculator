@@ -39,16 +39,6 @@ const screen = document.querySelector('#screen');
 const buttons = document.querySelectorAll('button');
 const numberBtn = document.querySelectorAll('.number');
 const operatorBtn = document.querySelectorAll('.operator');
-// const addBtn = document.querySelector('#add');
-// const subtractBtn = document.querySelector('#subtract');
-// const multiplyBtn = document.querySelector('#multiply');
-// const divideBtn = document.querySelector('#divide');
-
-
-
-// For 'a', add numbers to screen and the variable
-
-// NEED TO NEST THIS IN ANOTHER FUNCTION SO WHEN B IS STARTED, A ISN'T IMPACTED || IMMEDIATELY DEFINE A AS A DIFF THING WITH NUM (i.e. this is stringA not a)
 
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
