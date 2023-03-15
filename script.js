@@ -1,5 +1,6 @@
 let a = 0;
 let b = 0;
+let prepareClear = false;
 let currentOperator;
 let total;
 
@@ -44,26 +45,33 @@ const operatorBtn = document.querySelectorAll('.operator');
 // Action for button clicks
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
+        // Clear button
         if (e.target.id === 'clear') {
             a = 0;
             b = 0;
             while (screen.firstChild) {
                 screen.removeChild(screen.firstChild);
             };
+        // Operator button
         } else if (e.target.classList.contains('operator')) {
             a = parseFloat(b);
             b = 0;
             currentOperator = button.id;
-            // clear screen
-            while (screen.firstChild) {
-                screen.removeChild(screen.firstChild);
-            };
+            prepareClear = true;
+        // Number button
         } else if (e.target.classList.contains('number')) {
+            if (prepareClear === true) {
+                while (screen.firstChild) {
+                    screen.removeChild(screen.firstChild);
+                }
+            }
             const screenContent = document.createElement('div');
-                screenContent.classList.add('screen-content');
-                screenContent.textContent = button.textContent;
-                screen.appendChild(screenContent);
-                b += button.textContent;
+            screenContent.classList.add('screen-content');
+            screenContent.textContent = button.textContent;
+            screen.appendChild(screenContent);
+            b += button.textContent;
+            prepareClear = false;
+        // Equals button
         } else if (e.target.id === 'equals') {
             b = parseFloat(b);
             while (screen.firstChild) {
