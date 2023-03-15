@@ -1,6 +1,7 @@
 let a = 0;
 let b = 0;
-let currentOperator
+let currentOperator;
+let total;
 
 // Define math operations
 const add = function (a, b) {
@@ -69,6 +70,17 @@ buttons.forEach(button => {
                 //Add number to variable
                 b += button.textContent;
                 console.log(b);
+        } else if (e.target.id === 'equals') {
+            b = parseInt(b);
+            while (screen.firstChild) {
+                screen.removeChild(screen.firstChild);
+            };
+            console.log(operate(currentOperator, a, b));
+            const screenContent = document.createElement('div');
+                screenContent.classList.add('screen-content');
+                screenContent.textContent = operate(currentOperator, a, b);
+                screen.appendChild(screenContent);
+            b = operate(currentOperator, a, b);
         }
         // if equals, use the defined operator to run the function
     });
