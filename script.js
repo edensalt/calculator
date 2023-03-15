@@ -99,7 +99,7 @@ buttons.forEach(button => {
             }
         
         // Equals button
-        } else if (e.target.id === 'equals') {
+        } else if (e.target.id === 'equals' && typeof a !== 'string') {
             b = parseFloat(b);
             while (screen.firstChild) {
                 screen.removeChild(screen.firstChild);
