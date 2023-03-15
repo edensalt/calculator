@@ -32,42 +32,38 @@ const operate = function (operator, a, b) {
 }
 
 const screen = document.querySelector('#screen');
+const buttons = document.querySelectorAll('button');
 const numberBtn = document.querySelectorAll('.number');
 
 // For 'a', add numbers to screen and the variable
 
-numberBtn.forEach(numberBtn => {
-    numberBtn.addEventListener('click', () => {
-        // Log button clicked
-        const userNum = numberBtn.textContent;
-        console.log(userNum);
-        // Add button to screen
-        const screenContent = document.createElement('div');
-        screenContent.classList.add('screen-content');
-        screenContent.textContent = numberBtn.textContent;
-        screen.appendChild(screenContent);
-        //Add number to variable
-        a += userNum;
-        console.log(a);
+// NEED TO NEST THIS IN ANOTHER FUNCTION SO WHEN B IS STARTED, A ISN'T IMPACTED || IMMEDIATELY DEFINE A AS A DIFF THING WITH NUM (i.e. this is stringA not a)
+
+buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('number')) {
+            a = parseInt(b);
+            b = 0;
+            console.log(button.classList);
+        } else {
+            const screenContent = document.createElement('div');
+                screenContent.classList.add('screen-content');
+                screenContent.textContent = button.textContent;
+                screen.appendChild(screenContent);
+                //Add number to variable
+                b += button.textContent;
+                console.log(b);
+        }
     });
 });
 
 // If an operator is selected...
 
-
-
-// Clear the screen
-
-// Make 'a' a number
-
-// Start collecting numbers for b
-
 const operatorBtn = document.querySelectorAll('.operator');
 
-const operatorArray = Array.from(operatorBtn);
-
-operatorArray.forEach(operatorBtn => {
-    operatorBtn.addEventListener('click', () => {
-        console.log(operatorBtn.textContent);
+operatorBtn.forEach(operator => {
+    operator.addEventListener('click', () => {
+        // console.log(operator.textContent);
     });
 });
+// Clear the screen
