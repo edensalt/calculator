@@ -1,8 +1,25 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+h1,
+h3,
+p {
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+p {
+    font-size: medium;
+    font-style: italic;
 }
 
 #calculator {

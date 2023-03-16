@@ -56,10 +56,11 @@ buttons.forEach(button => {
             screenContent.classList.add('screen-content');
             screenContent.textContent = '0';
             screen.appendChild(screenContent);
-            let prepareClear = false;
+            prepareClear = true;
       
         // DELETE BUTTON
         } if (e.target.id === 'delete') {
+            // Idea: add functionality to delete one character from a total if it's a float
             bDelete = b.slice(0, -1);
             b = bDelete;
             screen.removeChild(screen.lastChild);
@@ -70,7 +71,7 @@ buttons.forEach(button => {
                 while (screen.firstChild) {
                     screen.removeChild(screen.firstChild);
                 }
-            } if (b.length < 12) { // Don't add numbers beyond 12
+            } if (b.length < 14) { // Don't add numbers beyond 14
                 if (e.target.id === 'decimal' && !b.includes('.') || e.target.id !== 'decimal') {
                     const screenContent = document.createElement('div');
                     screenContent.classList.add('screen-content');
