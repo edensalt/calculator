@@ -60,14 +60,15 @@ buttons.forEach(button => {
                 while (screen.firstChild) {
                     screen.removeChild(screen.firstChild);
                 }
-            };
-            if (typeof b !== 'string' || b.length < 12) { // Don't add numbers beyond 12
-                const screenContent = document.createElement('div');
-                screenContent.classList.add('screen-content');
-                screenContent.textContent = button.textContent;
-                screen.appendChild(screenContent);
-                b += button.textContent;
-                prepareClear = false;
+            } if (b.length < 12) { // Don't add numbers beyond 12
+                if (e.target.id === 'decimal' && !b.includes('.') || e.target.id !== 'decimal') {
+                    const screenContent = document.createElement('div');
+                    screenContent.classList.add('screen-content');
+                    screenContent.textContent = button.textContent;
+                    screen.appendChild(screenContent);
+                    b += button.textContent;
+                    prepareClear = false;
+                }
             }
 
          // OPERATOR BUTTON
@@ -86,7 +87,6 @@ buttons.forEach(button => {
 
             // if an operator has been previously selected
             } else {
-                console.log('lets total');
                 b = parseFloat(b);
                 while (screen.firstChild) {
                     screen.removeChild(screen.firstChild);
@@ -96,7 +96,7 @@ buttons.forEach(button => {
                     screenContent.classList.add('screen-content');
                     screenContent.textContent = 'ERROR';
                     screen.appendChild(screenContent);
-                    a = b;
+                    a = 'start';
                     b = '0';
                     currentOperator = button.id;
                     prepareClear = true;
@@ -118,6 +118,7 @@ buttons.forEach(button => {
                     prepareClear = true;
                 }
             }
+            console.log(currentOperator);
 
         // EQUALS BUTTON
         } else if (e.target.id === 'equals' && typeof a !== 'string') {
@@ -130,7 +131,7 @@ buttons.forEach(button => {
                 screenContent.classList.add('screen-content');
                 screenContent.textContent = 'ERROR';
                 screen.appendChild(screenContent);
-                a = b;
+                a = 'start';
                 b = '0';
                 prepareClear = true;
             } else {
