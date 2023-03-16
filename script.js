@@ -54,7 +54,13 @@ buttons.forEach(button => {
             };
             let prepareClear = false;
       
-        // NUMBER BUTTON
+        // DELETE BUTTON
+        } if (e.target.id === 'delete') {
+            bDelete = b.slice(0, -1);
+            b = bDelete;
+            screen.removeChild(screen.lastChild);
+
+            // NUMBER BUTTON
         } else if (e.target.classList.contains('number')) {
             if (prepareClear === true) {
                 while (screen.firstChild) {
