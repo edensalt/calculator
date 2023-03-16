@@ -7,3 +7,4 @@ The calculator follows one operator at a time, and therefore does not adhere to 
 ## Wish list for future updates
 
 - Add keyboard support
+- Pressing equals twice runs the same function again
