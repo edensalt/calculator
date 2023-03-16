@@ -60,7 +60,7 @@ buttons.forEach(button => {
             b = bDelete;
             screen.removeChild(screen.lastChild);
 
-            // NUMBER BUTTON
+        // NUMBER BUTTON
         } else if (e.target.classList.contains('number')) {
             if (prepareClear === true) {
                 while (screen.firstChild) {
