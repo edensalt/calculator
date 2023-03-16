@@ -52,6 +52,10 @@ buttons.forEach(button => {
             while (screen.firstChild) {
                 screen.removeChild(screen.firstChild);
             };
+            const screenContent = document.createElement('div');
+            screenContent.classList.add('screen-content');
+            screenContent.textContent = '0';
+            screen.appendChild(screenContent);
             let prepareClear = false;
       
         // DELETE BUTTON
