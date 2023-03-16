@@ -27,11 +27,18 @@ body {
     padding: 5px;
 }
 
+.row.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 5px;
+}
+
 #screen {
-    margin-right: 3px;
     min-height: 50px;
     display: flex;
-    flex: auto;
+    flex: 1;
+    justify-self: left;
     justify-content: right;
     background-color: whitesmoke;
     border: solid;
@@ -47,6 +54,46 @@ body {
     font-size: 20px;
     display: flex;
     align-items: center;
+}
+
+div.deletors {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+button.deletors {
+    width: 25px;
+    height: 25px;
+    font-size: 10px;
+    text-align: center;
+    padding-top: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#clear {
+    margin-bottom: 3px;
+}
+
+#clear,
+#delete {
+    background-color: rgb(241, 215, 215);
+    color: black;
+}
+
+#clear:hover,
+#delete:hover {
+    background-color:rgb(246, 162, 162);
+    cursor: pointer;
+}
+
+#clear:active,
+#delete:active {
+    background-color:rgb(206, 0, 0);
+    cursor: pointer;
 }
 
 button {
@@ -102,20 +149,5 @@ button {
 
 #equals:active {
     background-color:rgb(10, 206, 0);
-    cursor: pointer;
-}
-
-#clear {
-    background-color: rgb(241, 215, 215);
-    color: black;
-}
-
-#clear:hover {
-    background-color:rgb(246, 162, 162);
-    cursor: pointer;
-}
-
-#clear:active {
-    background-color:rgb(206, 0, 0);
     cursor: pointer;
 }
